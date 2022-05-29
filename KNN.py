@@ -30,6 +30,12 @@ def getIndex(array, value):
 df = pd.read_csv('./census.csv', names=['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status',
                  'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'income'], header=None)
 
+df = df.replace(' ?', np.nan)
+
+df['occupation'] = df['occupation'].fillna('Prof-specialty')
+df['workclass'] = df['workclass'].fillna('Private')
+df['native-country'] = df['native-country'].fillna('United-States')
+
 X = df.drop('income', axis=1).values
 y = df['income'].values
 
@@ -74,8 +80,9 @@ plt.ylabel('Acurácia')
 
 knn = KNeighborsClassifier(n_neighbors=10)
 knn.fit(X_train, y_train)
-print(knn.score(X_test, y_test))
 
+formated = "{:.2f}".format(knn.score(X_test, y_test) * 100)
+accuracy = formated.__str__()
 
 ''' 
 Testando o KNN com dados de uma pessoa
@@ -94,23 +101,8 @@ Capitasl-los: 0
 Hours-per-week: 40
 Native-country: United-States
 '''
+example = [35, 106967, 0, 0, 11, 0, 5, 2, 0, 1, 0, 0, 40, 0]
+person_data = knn.predict([example])
 
-print(knn.predict([[35, 106967, 0, 0, 11, 0, 5, 2, 0, 1, 0, 0, 40, 0]]))
-
-
-'''
-age: continuous.
-workclass: Private, Self-emp-not-inc, Self-emp-inc, Federal-gov, Local-gov, State-gov, Without-pay, Never-worked.
-fnlwgt: continuous.
-education: Bachelors, Some-college, 11th, HS-grad, Prof-school, Assoc-acdm, Assoc-voc, 9th, 7th-8th, 12th, Masters, 1st-4th, 10th, Doctorate, 5th-6th, Preschool.
-education-num: continuous.
-marital-status: Married-civ-spouse, Divorced, Never-married, Separated, Widowed, Married-spouse-absent, Married-AF-spouse.
-occupation: Tech-support, Craft-repair, Other-service, Sales, Exec-managerial, Prof-specialty, Handlers-cleaners, Machine-op-inspct, Adm-clerical, Farming-fishing, Transport-moving, Priv-house-serv, Protective-serv, Armed-Forces.
-relationship: Wife, Own-child, Husband, Not-in-family, Other-relative, Unmarried.
-race: White, Asian-Pac-Islander, Amer-Indian-Eskimo, Other, Black.
-sex: Female, Male.
-capital-gain: continuous.
-capital-loss: continuous.
-hours-per-week: continuous.
-native-country: United-States, Cambodia, England, Puerto-Rico, Canada, Germany, Outlying-US(Guam-USVI-etc), India, Japan, Greece, South, China, Cuba, Iran, Honduras, Philippines, Italy, Poland, Jamaica, Vietnam, Mexico, Portugal, Ireland, France, Dominican-Republic, Laos, Ecuador, Taiwan, Haiti, Columbia, Hungary, Guatemala, Nicaragua, Scotland, Thailand, Yugoslavia, El-Salvador, Trinadad&Tobago, Peru, Hong, Holand-Netherlands.
-'''
+print('Acuracia: ' + accuracy + '%')
+print('Predição de income:' + person_data[0].__str__() + ' dolares /ano')
