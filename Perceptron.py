@@ -13,7 +13,7 @@ def formatAccuracy(y_t, y_p):
 # NOTE - Treinando o modelo sem tratamento
 X_non_treated = indexConvert(X_non_treated)
 x_train_non_treated, x_test_non_treated, y_train_non_treated, y_test_non_treated = train_test_split(
-    X_non_treated, y_non_treated, test_size=0.25, random_state=27)
+    X_non_treated, y_non_treated, test_size=0.3, random_state=47)
 
 clf_non_treated = MLPClassifier(hidden_layer_sizes=(100, 100, 100), max_iter=500, alpha=0.0001,
                                 solver='sgd', verbose=10,  random_state=21, tol=0.000000001)
@@ -47,7 +47,7 @@ person_data_non_tretaed = clf_non_treated.predict([example_non_treated])
 # NOTE - Treinando o modelo com tratamento
 X_treated = indexConvert_treated(X_treated)
 x_train_treated, x_test_treated, y_train_treated, y_test_treated = train_test_split(
-    X_treated, y_treated, test_size=0.25, random_state=27)
+    X_treated, y_treated, test_size=0.3, random_state=21)
 
 clf_treated = MLPClassifier(hidden_layer_sizes=(100, 100, 100), max_iter=500, alpha=0.0001,
                             solver='sgd', verbose=10,  random_state=21, tol=0.000000001)

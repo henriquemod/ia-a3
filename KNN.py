@@ -16,11 +16,11 @@ X_treated = indexConvert_treated(X_treated)
 
 # NOTE - Treinando o modelo sem tratamento
 X_train_non_treated, X_test_non_treated, y_train_non_treated, y_test_non_treated = train_test_split(
-    X_non_treated, y_non_treated, test_size=0.4, random_state=42, stratify=y_non_treated)
+    X_non_treated, y_non_treated, test_size=0.3, random_state=42, stratify=y_non_treated)
 
 # NOTE - Treinando o modelo com tratamento
 X_train_treated, X_test_treated, y_train_treated, y_test_treated = train_test_split(
-    X_treated, y_treated, test_size=0.4, random_state=42, stratify=y_treated)
+    X_treated, y_treated, test_size=0.3, random_state=42, stratify=y_treated)
 
 neighbors = np.arange(1, 15)
 train_accuracy_non_treated = np.empty(len(neighbors))
