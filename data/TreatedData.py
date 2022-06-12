@@ -46,6 +46,5 @@ def indexRevert(X):
     converted = []
 
     for i, values in enumerate(X):
-        print(arrayIndex[i][values])
         converted.append(arrayIndex[i][values])
     return converted

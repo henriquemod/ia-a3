@@ -32,3 +32,24 @@ def indexConvert(X):
         X[i][9] = getIndex(sex, values[9])  # Sex
         X[i][13] = getIndex(nativeCountry, values[13])  # native country
     return X
+
+
+def indexRevert(X):
+    converted = []
+
+    converted.append(X[0])  # age
+    converted.append(workclass[X[1]])  # workclass
+    converted.append(X[2])  # fnlwgt
+    converted.append(education[X[3]])  # education
+    converted.append(X[4])  # education-enum
+    converted.append(maritalStatus[X[5]])  # marital status
+    converted.append(occupation[X[6]])  # occupation
+    converted.append(relationship[X[7]])  # relationship
+    converted.append(race[X[8]])  # race
+    converted.append(sex[X[9]])  # sex
+    converted.append(X[10])  # capital gain
+    converted.append(X[11])  # capital loss
+    converted.append(X[12])  # hours per week
+    converted.append(nativeCountry[X[13]])  # native country
+
+    return converted

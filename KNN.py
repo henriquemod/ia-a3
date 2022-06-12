@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as knn_plt
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from DataAnalises import X_non_treated, X_treated, y_non_treated, y_treated
-from Data import indexConvert
-from TreatedData import indexConvert as indexConvert_treated, indexRevert as indexRevert_treated
+from data.DataAnalises import X_non_treated, X_treated, y_non_treated, y_treated
+from data.Data import indexConvert, indexRevert as indexRevert_non_treated
+from data.TreatedData import indexConvert as indexConvert_treated, indexRevert as indexRevert_treated
 
 
 def formatAccuracy(knn, X_t, y_t):
@@ -77,32 +77,15 @@ knn_non_treated.fit(X_train_non_treated, y_train_non_treated)
 knn_treated = KNeighborsClassifier(n_neighbors=17)
 knn_treated.fit(X_train_treated, y_train_treated)
 
-# formated = "{:.2f}".format(knn.score(X_test, y_test) * 100)
 formated_non_treated = formatAccuracy(knn_non_treated, X_test_non_treated, y_test_non_treated)
 formated_treated = formatAccuracy(knn_treated, X_test_treated, y_test_treated)
 accuracy_non_treated = formated_non_treated.__str__()
 accuracy_treated = formated_treated.__str__()
 
-'''
-Testando o KNN com dados de uma pessoa
-Idade: 35
-Flng-Wgt: 106967
-Workclass: Private
-Education: Bachelors
-Education-Num: 11
-Marital Status: Married-civ-spouse
-Occupation: Prof-specialty
-Relationship: Husband
-Race: White
-Sex: Male
-Captail-gain: 0
-Capitasl-los: 0
-Hours-per-week: 40
-Native-country: United-States
-'''
-example_non_treated = [35, 106967, 0, 0, 11, 0, 5, 2, 0, 1, 0, 0, 40, 0]
+example_non_treated = [35, 0, 106967, 0, 11, 0, 5, 2, 0, 1, 3000, 0, 40, 0]
 example_treated = [1, 0, 0, 0, 5, 2, 0, 1, 0, 0, 1]
-# print(indexRevert_treated(example_treated))
+print(indexRevert_treated(example_treated))
+print(indexRevert_non_treated(example_non_treated))
 person_data_non_treated = knn_non_treated.predict([example_non_treated])
 person_data_treated = knn_treated.predict([example_treated])
 

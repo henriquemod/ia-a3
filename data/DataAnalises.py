@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 import seaborn as sns
 
-df = pd.read_csv('./census.csv', names=['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status', 'occupation',
+df = pd.read_csv('./data/census.csv', names=['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status', 'occupation',
                  'relationship', 'race', 'sex', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'income'], header=None)
 # df['income']=df['income'].map({' <=50K': 0, ' >50K': 1})
 df = df.replace(' ?', np.nan)
@@ -38,9 +38,6 @@ df.describe(include=["O"])
 y_non_treated = df['income']
 X_non_treated = df.drop('income', axis=1).values
 
-print(X_non_treated.shape)
-
-
 # NOTE - Visualizando as características numéricas do dataset utilizando histogramas
 # para analisar a distribuição dessas características no dataset
 # SECTION
@@ -61,10 +58,12 @@ print(X_non_treated.shape)
 #              va='center', color='white', fontsize=14)
 # SECTION
 
-# NOTE - Como a correlação entre a saída(income) e fnlwgt é 0, podemos remover essa coluna
-df.drop(['fnlwgt'], axis=1, inplace=True)
-
 dataset = df.copy()
+
+# NOTE - Como a correlação entre a saída(income) e fnlwgt é 0, podemos remover essa coluna
+# df.drop(['fnlwgt'], axis=1, inplace=True)
+dataset.drop(['fnlwgt'], axis=1, inplace=True)
+
 
 # NOTE - Distribuindo a coluna de idade em 3 partes significativas e plotando ela correspondente ao atributo de saída(income)
 dataset['age'] = pd.cut(dataset['age'], bins=[0, 25, 50, 100], labels=[
@@ -96,7 +95,6 @@ dataset['Horas por semana'] = pd.cut(dataset['hours-per-week'],
 
 # Combinando as escolas de ensino mais baixas
 # SECTION
-df.drop(['education-num'], axis=1, inplace=True)
 dataset.drop(['education-num'], axis=1, inplace=True)
 dataset['education'].replace([' 11th', ' 9th', ' 7th-8th', ' 5th-6th', ' 10th', ' 1st-4th', ' Preschool', ' 12th'],
                         ' School', inplace=True)
@@ -149,6 +147,6 @@ y_treated = dataset['income']
 X_treated = dataset.drop('income', axis=1).values
 # print(df.drop('income', axis=1).head(5))
 
-print(dataset.head())
+print(df.head())
 
 # plt.show()
