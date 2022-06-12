@@ -2,8 +2,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 from data.DataAnalises import X_treated, y_treated, X_non_treated, y_non_treated
-from data.Data import indexConvert
-from data.TreatedData import indexConvert as indexConvert_treated
+from utils.nonTreatedDataUtils import indexConvert
+from utils.treatedDataUtils import indexConvert as indexConvert_treated
 
 
 def formatAccuracy(y_t, y_p):

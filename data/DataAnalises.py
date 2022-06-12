@@ -97,7 +97,7 @@ dataset['Horas por semana'] = pd.cut(dataset['hours-per-week'],
 # SECTION
 dataset.drop(['education-num'], axis=1, inplace=True)
 dataset['education'].replace([' 11th', ' 9th', ' 7th-8th', ' 5th-6th', ' 10th', ' 1st-4th', ' Preschool', ' 12th'],
-                        ' School', inplace=True)
+                             ' School', inplace=True)
 # sns.catplot(x = 'income', hue = 'education', data = df, kind='count')
 # SECTION
 
@@ -113,7 +113,7 @@ dataset['education'].replace([' 11th', ' 9th', ' 7th-8th', ' 5th-6th', ' 10th', 
 # Como a maioria da raça é branca, o restante pode ser combinado junto formando um novo grupo
 dataset['race'].unique()
 dataset['race'].replace([' Black', ' Asian-Pac-Islander',
-                   ' Amer-Indian-Eskimo', ' Other'], ' Other', inplace=True)
+                         ' Amer-Indian-Eskimo', ' Other'], ' Other', inplace=True)
 
 # sns.catplot(x='income', hue='race', data = df, kind='count')
 
@@ -146,7 +146,5 @@ dataset.drop('hours-per-week', axis=1, inplace=True)
 y_treated = dataset['income']
 X_treated = dataset.drop('income', axis=1).values
 # print(df.drop('income', axis=1).head(5))
-
-print(df.head())
 
 # plt.show()

@@ -3,8 +3,8 @@ import matplotlib.pyplot as knn_plt
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from data.DataAnalises import X_non_treated, X_treated, y_non_treated, y_treated
-from data.Data import indexConvert, indexRevert as indexRevert_non_treated
-from data.TreatedData import indexConvert as indexConvert_treated, indexRevert as indexRevert_treated
+from utils.nonTreatedDataUtils import indexConvert, indexRevert as indexRevert_non_treated
+from utils.treatedDataUtils import indexConvert as indexConvert_treated, indexRevert as indexRevert_treated
 
 
 def formatAccuracy(knn, X_t, y_t):
@@ -84,12 +84,12 @@ accuracy_treated = formated_treated.__str__()
 
 example_non_treated = [35, 0, 106967, 0, 11, 0, 5, 2, 0, 1, 3000, 0, 40, 0]
 example_treated = [1, 0, 0, 0, 5, 2, 0, 1, 0, 0, 1]
-print(indexRevert_treated(example_treated))
-print(indexRevert_non_treated(example_non_treated))
 person_data_non_treated = knn_non_treated.predict([example_non_treated])
 person_data_treated = knn_treated.predict([example_treated])
 
 print('Acurácia sem tratamento: ' + accuracy_non_treated + '%')
-print('Acurácia com tratamento: ' + accuracy_treated + '%')
-print('Predição de income sem tratamento:' + person_data_non_treated[0].__str__() + ' dólares /ano')
+print('Acurácia com tratamento: ' + accuracy_treated + '%\n')
+print(indexRevert_non_treated(example_non_treated))
+print('Predição de income sem tratamento:' + person_data_non_treated[0].__str__() + ' dólares /ano\n')
+print(indexRevert_treated(example_treated))
 print('Predição de income com tratamento:' + person_data_treated[0].__str__() + ' dólares /ano')
