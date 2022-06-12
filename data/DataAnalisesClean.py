@@ -42,15 +42,14 @@ dataset['Horas por semana'] = pd.cut(dataset['hours-per-week'],
 dataset.drop('hours-per-week', axis=1, inplace=True)
 
 # NOTE - Combinando as escolas de ensino mais baixas
-dataset.drop(['education-num'], axis=1, inplace=True)
 dataset['education'].replace([' 11th', ' 9th', ' 7th-8th', ' 5th-6th', ' 10th', ' 1st-4th', ' Preschool', ' 12th'],
                              ' School', inplace=True)
+
+dataset.drop(['education-num'], axis=1, inplace=True)
 
 # NOTE - Como a maioria da raça é branca, o restante pode ser combinado junto formando um novo grupo
 dataset['race'].replace([' Black', ' Asian-Pac-Islander',
                          ' Amer-Indian-Eskimo', ' Other'], ' Other', inplace=True)
-
-count = dataset['native-country'].value_counts()
 
 # NOTE -  Como a maioria dos países é americano, combinamos os outros países em um único grupo
 countries = np.array(dataset['native-country'].unique())

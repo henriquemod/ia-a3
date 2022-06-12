@@ -22,11 +22,11 @@ X_train_non_treated, X_test_non_treated, y_train_non_treated, y_test_non_treated
 X_train_treated, X_test_treated, y_train_treated, y_test_treated = train_test_split(
     X_treated, y_treated, test_size=0.3, random_state=42, stratify=y_treated)
 
-neighbors = np.arange(1, 25)
-train_accuracy_non_treated = np.empty(len(neighbors))
-test_accuracy_non_treated = np.empty(len(neighbors))
-train_accuracy_treated = np.empty(len(neighbors))
-test_accuracy_treated = np.empty(len(neighbors))
+# neighbors = np.arange(1, 25)
+# train_accuracy_non_treated = np.empty(len(neighbors))
+# test_accuracy_non_treated = np.empty(len(neighbors))
+# train_accuracy_treated = np.empty(len(neighbors))
+# test_accuracy_treated = np.empty(len(neighbors))
 
 # for i, k in enumerate(neighbors):
 #     # Configurando um classificador knn com k vizinhos
